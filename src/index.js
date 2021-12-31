@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const productRoutes = require("./routes/product");
 require("dotenv").config();
 
@@ -12,6 +13,14 @@ app.use(express.json());
 
 //routes
 app.use("/api/products", productRoutes);
+
+//cors
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 //mongodb connection
 mongoose
