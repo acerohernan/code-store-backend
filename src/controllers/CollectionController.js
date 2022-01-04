@@ -9,6 +9,16 @@ const getAllCollections = (req, res) => {
   });
 };
 
+const getProductById = (req, res) => {
+  const { category, id } = req.params;
+  CollectionModel.find({ category }, (err, data) => {
+    if (err) res.status(400).send(err.message);
+    const { products } = data[0];
+    const product = products.find((el) => String(el._id) === id);
+    res.status(200).json(product);
+  });
+};
+
 const addCollection = (req, res) => {
   const { category, products } = req.body;
 
@@ -24,4 +34,4 @@ const addCollection = (req, res) => {
   });
 };
 
-module.exports = { getAllCollections, addCollection };
+module.exports = { getAllCollections, getProductById, addCollection };
