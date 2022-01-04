@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const productRoutes = require("./routes/product");
+const collectionRoutes = require("./routes/collections");
 require("dotenv").config();
 
 //port
@@ -12,15 +13,11 @@ const app = express();
 app.use(express.json());
 
 //cors
-/* const corsOptions = {
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-}; */
 app.use(cors());
 
 //routes
 app.use("/api/products", productRoutes);
+app.use("/api/collections", collectionRoutes);
 
 //mongodb connection
 mongoose
